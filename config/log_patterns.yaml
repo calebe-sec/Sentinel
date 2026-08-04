@@ -30,4 +30,5 @@ sudo:
     regex: 'FAILED SU \(to (?P<target_user>\w+)\) (?P<user>\w+)'
 
 nginx:
-  
+  user_agent:
+    keyword: " "

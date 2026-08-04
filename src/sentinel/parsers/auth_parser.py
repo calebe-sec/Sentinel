@@ -1,16 +1,8 @@
 import re
 import yaml
 
-from .base_parser import BaseParser
+from .base_parser import BaseParser, load_patterns
 
-def load_patterns(path,category):
-    with open(path) as f:
-        raw = yaml.safe_load(f)
-
-    compiled = {}
-    for event_type, data in raw[category].items():
-        compiled[data["keyword"]] = (event_type, re.compile(data["regex"]))
-    return compiled
 
 class AuthLogParser(BaseParser):
     HEADER = re.compile(r"(?P<month>[a-zA-Z]{3})\s+(?P<day>\d{2})\s+(?P<hour>\d{2}:\d{2}:\d{2})\s+(?P<hostname>[\w-]+)\s+(?P<process>[\w-]+)\[(?P<pid>\d+)\]:\s+(?P<message>.*)", re.VERBOSE,)
